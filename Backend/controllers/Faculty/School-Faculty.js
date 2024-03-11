@@ -1,5 +1,5 @@
-import { Faculty } from "../../models/admin/Faculty-Schema.js";
-import { facultyStudentDetails } from "../../models/admin/Faculty-Student-Details-Schema.js";
+import { Faculty } from "../../models/Faculty/Faculty-Schema.js";
+import { facultyStudentDetails } from "../../models/Admin/Faculty-Student-Details-Schema.js";
 
 export const RequsetToNewFaculty = async (req, res) => {
   const {

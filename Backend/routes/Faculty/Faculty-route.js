@@ -1,5 +1,5 @@
 import Router from "express";
-import { RequsetToNewFaculty, facultyForm } from "../../controllers/Admin/School-Faculty.js";
+import { RequsetToNewFaculty, facultyForm } from "../../controllers/faculty/School-Faculty.js";
 
 export const SclFaculty = Router();
 

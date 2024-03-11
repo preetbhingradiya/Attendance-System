@@ -1,8 +1,8 @@
 import express from "express"
 import {config} from "dotenv"
 import {connect}  from "./config/Admin.js";
-import {SclAdmin} from "./routes/Admin/admin-route.js"
-import { SclFaculty } from "./routes/Admin/faculty-route.js";
+import {SclAdmin} from "./routes/Admin/Admin-route.js"
+import { SclFaculty } from "./routes/Faculty/Faculty-route.js";
 
 const app = express()
 config();

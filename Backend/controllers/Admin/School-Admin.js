@@ -1,4 +1,4 @@
-import { Admin } from "../../models/admin/Admin-Schema.js"
+import { Admin } from "../../models/Admin/Admin-Schema.js"
 
 export const AdminOfSchool=async(req,res)=>{
     let {_AdminId,name,password}=req.body
