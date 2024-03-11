@@ -1,0 +1,37 @@
+<form action="/api/v1/school/request/faculty" method="post">
+  <label>FirstName :- </label>
+  <input type="text" name="firstName" /><br /><br />
+  <label>lastName :- </label>
+  <input type="text" name="lastName" /><br /><br />
+  <label>email :- </label>
+  <input type="text" name="email" /><br /><br />
+  <label>password :- </label>
+  <input type="text" name="password" /><br /><br />
+  <label>experience :- </label>
+  <input type="number" name="experience" />
+    <select name="totalExperience">
+        <option value="Year">Year</option>
+        <option value="Month">Month</option>
+    </select><br><br>
+  <label>previousSchool Name :- </label>
+  <input type="text" name="previousSchool" /><br /><br />
+
+  <div>
+    <label>Subject :- </label>
+    <input type="checkbox" name="subject" value="English" /> English
+    <input type="checkbox" name="subject" value="Maths" /> Maths
+    <input type="checkbox" name="subject" value="Hindi" /> Hindi
+    <input type="checkbox" name="subject" value="Science"/> Science
+    <input type="checkbox" name="subject" value="Gujrati" /> Gujrati
+    <input type="checkbox" name="subject" value="Social Science"/> Social Science
+  </div><br>
+  
+  <div>
+    <label>currentSalary :- </label>
+    <input type="number" name="currentSalary" /><br /><br />
+    <label>exptectedSalary :- </label>
+  </div>
+
+  <input type="number" name="exptectedSalary" />
+  <input type="submit" />
+</form>

@@ -27,5 +27,4 @@ export const LoginAdmin=async(req,res)=>{
     else{
         res.status(400).json({succecc:false,message:"Please Enter valid Admin Id"})
     }
-
 }
