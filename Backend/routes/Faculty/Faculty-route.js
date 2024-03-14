@@ -1,8 +1,8 @@
 import Router from "express";
-import { RequsetToNewFaculty, facultyForm, googleAuthentication, loginFaculty } from "../../controllers/faculty/School-Faculty.js";
 import passport from "passport";
-import {} from "../../Authentication/auth.js"
+import {} from "../../Authentication/Facultyauth.js"
 import session from "express-session";
+import { RequsetToNewFaculty, facultyForm, googleAuthentication, loginFaculty } from "../../controllers/Faculty/School-Faculty.js";
 
 export const SclFaculty = Router();
 
@@ -19,19 +19,19 @@ SclFaculty.use(session({
 SclFaculty.use(passport.initialize())
 SclFaculty.use(passport.session())
 
-SclFaculty.get('/faculty/auth/google',
+SclFaculty.get('/auth/google',
   passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
 ));
 
 SclFaculty.get('/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/api/v1/school/faculty/auth/google/success',
-        failureRedirect: '/api/v1/school/faculty/auth/google/failure'
+        successRedirect: '/api/v1/school/auth/google/success',
+        failureRedirect: '/api/v1/school/auth/google/failure'
 }));
 
-SclFaculty.get("/faculty/auth/google/success",googleAuthentication)
+SclFaculty.get("/auth/google/success",googleAuthentication)
 
-SclFaculty.get("/faculty/auth/google/failure",(req,res)=>{
+SclFaculty.get("/auth/google/failure",(req,res)=>{
     res.status(400).json({suceess:false,message:"Please try sign up to this email id"})
 })

@@ -91,19 +91,6 @@ export const loginStudnet = async(req,res)=>{
       }
 }
 
-// export const googleAuthentication=async(req,res)=>{
-//   let user=req.user.email
-//   let confirmEmail = await Student.findOne({ _Email:user});
-
-//   if(confirmEmail){
-//       let token = jwt.sign({_id:confirmEmail._id},process.env.STUDENT_TOKEN)
-//       return res.status(200).cookie("sclStudentToken",token,{ maxAge: 5 * 60 * 1000,}).json({success:true,Message:`Welcome back ${confirmEmail._firstName+ " " + confirmEmail._lastName}`})
-//   }
-//   else{
-//     return res.redirect("/api/v1/school/student/auth/google/failure")
-//   }
-// }
-
 export const studentForm = (req, res) => {
   res.render("student");
 };

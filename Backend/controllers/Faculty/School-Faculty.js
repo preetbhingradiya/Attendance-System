@@ -1,8 +1,9 @@
 import { Faculty } from "../../models/Faculty/Faculty-Schema.js";
 import { facultyDetails } from "../../models/Admin/FacultyDetails-Schema.js";
 import { trasport } from "../../config/Maile.js";
-import bcrypt from "bcrypt"
-import jwt from 'jsonwebtoken'
+import { Student } from "../../models/Student/Stuedent-schema.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const RequsetToNewFaculty = async (req, res) => {
   const {
@@ -41,22 +42,20 @@ export const RequsetToNewFaculty = async (req, res) => {
   }
 
   let checkEmail = await Faculty.findOne({ _Email: email });
-  let hashPassword= await bcrypt.hash(password,10);
+  let hashPassword = await bcrypt.hash(password, 10);
   if (checkEmail) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "Email id is alerdy use. Please use differnet email",
-      });
+    return res.status(400).json({
+      success: false,
+      message: "Email id is alerdy use. Please use differnet email",
+    });
   } else {
     let faculty = await Faculty.create({
       _firstName: firstName,
       _lastName: lastName,
       _Email: email,
       _password: hashPassword,
-      _contectNo:contect,
-      _experience: experience+' '+totalExperience,
+      _contectNo: contect,
+      _experience: experience + " " + totalExperience,
       _subjects: subject,
       _previousSchool: previousSchool,
       _currentSalary: currentSalary,
@@ -85,51 +84,90 @@ export const RequsetToNewFaculty = async (req, res) => {
       });
     }
 
-    let token = jwt.sign({_id:faculty._id},process.env.FACULTY_TOKEN)
-    res.status(200).cookie("sclFacultyToken",token).json({
-        success: true,
-        Message: "successfull sign up of school faculty deparment",
-        FacultyDetails:faculty
+    let token = jwt.sign({ _id: faculty._id }, process.env.FACULTY_TOKEN);
+    res.status(200).cookie("sclFacultyToken", token).json({
+      success: true,
+      Message: "successfull sign up of school faculty deparment",
+      FacultyDetails: faculty,
     });
   }
 };
 
-export const loginFaculty=async(req,res)=>{
-  const {
-    email,
-    password,
-  } = req.body
+export const loginFaculty = async (req, res) => {
+  const { email, password } = req.body;
 
   let confirmEmail = await Faculty.findOne({ _Email: email });
 
-  if(confirmEmail){
-    let confirmPassword = await bcrypt.compare(password,confirmEmail._password)
-    if(confirmEmail._Email == email && confirmPassword)
-    {
-      let token = jwt.sign({_id:confirmEmail._id},process.env.FACULTY_TOKEN)
-      return res.status(200).cookie("sclFacultyToken",token,{ maxAge: 5 * 60 * 1000,}).json({success:true,Message:`Welcome back ${confirmEmail._firstName+ " " + confirmEmail._lastName}`})
+  if (confirmEmail) {
+    let confirmPassword = await bcrypt.compare(
+      password,
+      confirmEmail._password
+    );
+    if (confirmEmail._Email == email && confirmPassword) {
+      let token = jwt.sign(
+        { _id: confirmEmail._id },
+        process.env.FACULTY_TOKEN
+      );
+      return res
+        .status(200)
+        .cookie("sclFacultyToken", token, { maxAge: 5 * 60 * 1000 })
+        .json({
+          success: true,
+          Message: `Welcome back ${
+            confirmEmail._firstName + " " + confirmEmail._lastName
+          }`,
+        });
+    } else {
+      return res
+        .status(401)
+        .json({ success: false, Message: "Incorrect Email or Password" });
     }
-    else{
-      return res.status(401).json({success:false,Message:"Incorrect Email or Password"})
-    } 
+  } else {
+    return res
+      .status(401)
+      .json({
+        success: false,
+        message: "Please Enter valid email or try this email to sing up",
+      });
   }
-  else{
-    return res.status(401).json({success:false,message:"Please Enter valid email or try this email to sing up"})
-  }
-}
+};
 
-export const googleAuthentication=async(req,res)=>{
-  let user=req.user.email
-  let confirmEmail = await Faculty.findOne({ _Email:user});
+export const googleAuthentication = async (req, res) => {
+  let user = req.user.email;
+  let confirmFacultyEmail = await Faculty.findOne({ _Email: user });
 
-  if(confirmEmail){
-      let token = jwt.sign({_id:confirmEmail._id},process.env.FACULTY_TOKEN)
-      return res.status(200).cookie("sclFacultyToken",token,{ maxAge: 5 * 60 * 1000,}).json({success:true,Message:`Welcome back ${confirmEmail._firstName+ " " + confirmEmail._lastName}`})
+  if (confirmFacultyEmail) {
+    let token = jwt.sign(
+      { _id: confirmFacultyEmail._id },
+      process.env.FACULTY_TOKEN
+    );
+    return res
+      .status(200)
+      .cookie("sclFacultyToken", token, { maxAge: 5 * 60 * 1000 })
+      .json({
+        success: true,
+        Message: `Welcome back ${
+          confirmFacultyEmail._firstName + " " + confirmFacultyEmail._lastName
+        }`,
+      });
+  } else {
+    let confirmStudentEmail = await Student.findOne({ _Email: user });
+    if (confirmStudentEmail) {
+      let token = jwt.sign(
+        { _id: confirmStudentEmail._id },
+        process.env.STUDENT_TOKEN
+      );
+      return res
+        .status(200)
+        .cookie("sclStudentToken", token, { maxAge: 5 * 60 * 1000 })
+        .json({
+          success: true,
+          Message: `Welcome back ${confirmStudentEmail._fullname}`,
+        });
+    }
+    return res.redirect("/api/v1/school/auth/google/failure");
   }
-  else{
-    return res.redirect("/api/v1/school/faculty/auth/google/failure")
-  }
-}
+};
 
 export const facultyForm = (req, res) => {
   res.render("faculty");
