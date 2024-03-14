@@ -5,6 +5,7 @@ const FacultySChema = new mongoose.Schema({
     _lastName:String,
     _Email:String,
     _password:String,
+    _contectNo:String,
     _experience:String,
     _subjects:[],
     _previousSchool:String,
