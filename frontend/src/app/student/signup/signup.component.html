@@ -1,0 +1,75 @@
+<!-- <form >
+    <label>fullName :- </label>
+    <input type="text" name="fullname" /><br /><br />
+    <label>email :- </label>
+    <input type="text" name="email" /><br /><br />
+    <label>password :- </label>
+    <input type="text" name="password" /><br /><br />
+    <label >studentcontect-No :- </label><br>
+    <p>**if the student conect number is available write here otherwise blanck field </p>
+    <input type="text" name="studecontect"><br><br>
+    <label >parentcontect-No :- </label>
+    <input type="text" name="percontect"><br><br>
+    <label >Std:</label>
+    <select name="std">
+          <option value="6">6Th</option>
+          <option value="7">7Th</option>
+          <option value="8">8Th</option>
+          <option value="9">9Th</option>
+          <option value="10">10Th</option>
+    </select><br><br>
+    <label>previous std parcentage :- </label>
+    <input type="text" name="previousStdPer" /><br /><br />
+
+    <input type="submit" />
+  </form>
+  
+<a href="/api/v1/school/auth/google">click</a> -->
+
+
+<form style="width: 40%;margin: 0 auto;" [formGroup]="formData" (ngSubmit)="SignUpStudent()">
+    <div class="input-group mb-3">
+        <label class="input-group-text">fullName</label>
+        <input type="text" aria-label="Last name" class="form-control" placeholder="First name + Last name" formControlName="fullname">
+      </div>
+    <div class="mb-3 input-group">
+      <label class=" input-group-text">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="name@gmail.com" aria-describedby="emailHelp" formControlName="email">
+    </div>
+    <div class="mb-3 input-group">
+      <label class="input-group-text">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Minmum 6 character is required" formControlName="password">
+    </div>
+    <div class="mb-3 input-group">
+        <label  class="input-group-text">Student Contect</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="*If the number is available write here" formControlName="studentContect">
+    </div>
+    <div class="mb-3 input-group">
+        <label  class="input-group-text">Parent Contect</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Contect number" formControlName="parentContect">
+    </div>
+    <div class="mb-3 input-group">
+        <label  class="input-group-text" >Std:- </label>
+        <select formControlName="std">
+            <option value="6">6Th</option>
+            <option value="7">7Th</option>
+            <option value="8">8Th</option>
+            <option value="9">9Th</option>
+            <option value="10">10Th</option>
+      </select>
+    </div>
+    <div class="mb-3 input-group">
+        <label  class="input-group-text">previous School</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="school name" formControlName="previousScl">
+    </div>
+    <div class="mb-3 input-group">
+        <label  class="input-group-text">previous std parcentage</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="%" formControlName="previousStd">
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
