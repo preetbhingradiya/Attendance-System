@@ -8,6 +8,7 @@ const StudentSChema = new mongoose.Schema({
     _studentContect:String,
     _std:String,
     _previousStd:String,
+    _previousScl:String,
     _previousStdPercentage:String,
     _requestdAt:Date
 })

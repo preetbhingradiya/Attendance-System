@@ -64,7 +64,7 @@
     </div>
     <div class="mb-3 input-group">
         <label  class="input-group-text">previous std parcentage</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="%" formControlName="previousStd">
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="%" formControlName="previousStdPer">
     </div>
 
     <div class="mb-3 form-check">
@@ -73,3 +73,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+
+<div class="loader" *ngIf="isShowed"></div>

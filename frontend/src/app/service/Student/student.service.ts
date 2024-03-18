@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -5,5 +6,11 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class StudetService {
-  constructor() {}
+
+  baseUsrl='http://localhost:8000/api/v1/school'
+  constructor(private studenHttp:HttpClient) {}
+
+  postStudent(data:any){
+    return this.studenHttp.post(this.baseUsrl+'/request/student',data)
+  }
 }

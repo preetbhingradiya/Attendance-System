@@ -8,9 +8,10 @@ export const requestStudent = async (req, res) => {
     fullname,
     email,
     password,
-    studecontect,
-    percontect,
+    studentContect,
+    parentContect,
     std,
+    previousScl,
     previousStdPer,
   } = req.body;
 
@@ -20,7 +21,7 @@ export const requestStudent = async (req, res) => {
 
 
   if (checkEmail) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "Email id is alerdy use. Please use differnet id",
     });
@@ -29,10 +30,11 @@ export const requestStudent = async (req, res) => {
       _fullname: fullname,
       _Email: email,
       _password: hashPassword,
-      _studentContect: studecontect,
-      _parentContect: percontect,
+      _studentContect: studentContect,
+      _parentContect: parentContect,
       _std: std + "th",
       _previousStd: previousStd - 1 + "th",
+      _previousScl:previousScl,
       _previousStdPercentage: previousStdPer + "%",
       _requestdAt: Date.now(),
     });

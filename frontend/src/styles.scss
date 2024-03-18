@@ -1,23 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
-.mr-1{
-    margin-right: 5px;
+.mr-1 {
+  margin-right: 5px;
 }
-.mr-2{
-    margin-right: 10px;
+.mr-2 {
+  margin-right: 10px;
 }
-.mr-3{
-    margin-right: 15px;
+.mr-3 {
+  margin-right: 15px;
 }
-.mr-4{
-    margin-right: 20px;
+.mr-4 {
+  margin-right: 20px;
 }
-.mr-5{
-    margin-right: 22px;
+.mr-5 {
+  margin-right: 22px;
 }
 // .input-group-text{
 //     // background-color: rgba(172, 167, 167, 0.764);
 // }
+.loader {
+  border: 14px solid #f3f3f3; /* Light grey */
+  border-top: 12px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 38%;
+  left: 45%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
