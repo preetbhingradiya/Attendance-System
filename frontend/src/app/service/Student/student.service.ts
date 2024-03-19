@@ -11,6 +11,6 @@ export class StudetService {
   constructor(private studenHttp:HttpClient) {}
 
   postStudent(data:any){
-    return this.studenHttp.post(this.baseUsrl+'/request/student',data)
+    return this.studenHttp.post(this.baseUsrl+'/request/student',data,{withCredentials:true})
   }
 }

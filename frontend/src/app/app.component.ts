@@ -21,8 +21,5 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.facultyService.getfaculty().subscribe((res)=>{
-      console.log(res)
-    })
   }
 }

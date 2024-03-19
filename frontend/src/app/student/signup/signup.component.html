@@ -1,77 +1,169 @@
-<!-- <form >
-    <label>fullName :- </label>
-    <input type="text" name="fullname" /><br /><br />
-    <label>email :- </label>
-    <input type="text" name="email" /><br /><br />
-    <label>password :- </label>
-    <input type="text" name="password" /><br /><br />
-    <label >studentcontect-No :- </label><br>
-    <p>**if the student conect number is available write here otherwise blanck field </p>
-    <input type="text" name="studecontect"><br><br>
-    <label >parentcontect-No :- </label>
-    <input type="text" name="percontect"><br><br>
-    <label >Std:</label>
-    <select name="std">
-          <option value="6">6Th</option>
-          <option value="7">7Th</option>
-          <option value="8">8Th</option>
-          <option value="9">9Th</option>
-          <option value="10">10Th</option>
-    </select><br><br>
-    <label>previous std parcentage :- </label>
-    <input type="text" name="previousStdPer" /><br /><br />
+<form
+  style="width: 40%; margin: 0 auto"
+  [formGroup]="formData"
+  (ngSubmit)="SignUpStudent()"
+>
+  <div class="input-group mb-3">
+    <label class="input-group-text">fullName</label>
+    <input
+      type="text"
+      aria-label="Last name"
+      class="form-control"
+      placeholder="First name + Last name"
+      formControlName="fullname"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('fullname').errors?.['required'] && formData.get('fullname').touched"
+    class="errorText"
+    >*Full name field is required</span
+  >
+  <span
+    *ngIf="formData.get('fullname').errors?.['pattern'] && formData.get('fullname').touched"
+    class="errorText"
+    >*Only alphabet character is required</span
+  >
 
-    <input type="submit" />
-  </form>
-  
-<a href="/api/v1/school/auth/google">click</a> -->
+  <div class="mb-3 input-group">
+    <label class="input-group-text">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      placeholder="name@gmail.com"
+      aria-describedby="emailHelp"
+      formControlName="email"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('email').errors?.['required'] && formData.get('email').touched"
+    class="errorText"
+    >*Email field is required</span
+  >
+  <span
+    *ngIf="formData.get('email').errors?.['noSpaceAllowed'] && formData.get('email').touched"
+    class="errorText"
+    >*No spaceAllowed in email</span
+  >
+  <span
+    *ngIf="formData.get('email').errors?.['emailValid'] && formData.get('email').touched"
+    class="errorText"
+    >*Plaese Enter valid email Address</span
+  >
 
+  <div class="mb-3 input-group">
+    <label class="input-group-text">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      placeholder="Minmum 6 character is required"
+      formControlName="password"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('password').errors?.['required'] && formData.get('password').touched"
+    class="errorText"
+    >*password field is required</span
+  >
+  <span
+    *ngIf="formData.get('password').errors?.['pattern'] && formData.get('password').touched"
+    class="errorText"
+    >*password shoud be minimum 6 character</span
+  >
 
-<form style="width: 40%;margin: 0 auto;" [formGroup]="formData" (ngSubmit)="SignUpStudent()">
-    <div class="input-group mb-3">
-        <label class="input-group-text">fullName</label>
-        <input type="text" aria-label="Last name" class="form-control" placeholder="First name + Last name" formControlName="fullname">
-      </div>
-    <div class="mb-3 input-group">
-      <label class=" input-group-text">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="name@gmail.com" aria-describedby="emailHelp" formControlName="email">
-    </div>
-    <div class="mb-3 input-group">
-      <label class="input-group-text">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Minmum 6 character is required" formControlName="password">
-    </div>
-    <div class="mb-3 input-group">
-        <label  class="input-group-text">Student Contect</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="*If the number is available write here" formControlName="studentContect">
-    </div>
-    <div class="mb-3 input-group">
-        <label  class="input-group-text">Parent Contect</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Contect number" formControlName="parentContect">
-    </div>
-    <div class="mb-3 input-group">
-        <label  class="input-group-text" >Std:- </label>
-        <select formControlName="std">
-            <option value="6">6Th</option>
-            <option value="7">7Th</option>
-            <option value="8">8Th</option>
-            <option value="9">9Th</option>
-            <option value="10">10Th</option>
-      </select>
-    </div>
-    <div class="mb-3 input-group">
-        <label  class="input-group-text">previous School</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="school name" formControlName="previousScl">
-    </div>
-    <div class="mb-3 input-group">
-        <label  class="input-group-text">previous std parcentage</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="%" formControlName="previousStdPer">
-    </div>
+  <div class="mb-3 input-group">
+    <label class="input-group-text">Student Contect</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="*If the number is available write here"
+      formControlName="studentContect"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('studentContect').errors?.['pattern'] && formData.get('studentContect').touched"
+    class="errorText"
+    >*contect number is not valid</span
+  >
 
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <div class="mb-3 input-group">
+    <label class="input-group-text">Parent Contect</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Contect number"
+      formControlName="parentContect"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('parentContect').errors?.['required'] && formData.get('parentContect').touched"
+    class="errorText"
+    >*parentContect field is required</span
+  >
+  <span
+    *ngIf="formData.get('parentContect').errors?.['pattern'] && formData.get('parentContect').touched"
+    class="errorText"
+    >*contect number is not valid</span
+  >
+
+  <div class="mb-3 input-group">
+    <label class="input-group-text">Std:- </label>
+    <select formControlName="std">
+      <option value="6">6Th</option>
+      <option value="7">7Th</option>
+      <option value="8">8Th</option>
+      <option value="9">9Th</option>
+      <option value="10">10Th</option>
+    </select>
+  </div>
+  <div class="mb-3 input-group">
+    <label class="input-group-text">previous School</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="school name"
+      formControlName="previousScl"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('previousScl').errors?.['required'] && formData.get('previousScl').touched"
+    class="errorText"
+    >*previousScl name field is required</span
+  >
+  <span
+    *ngIf="formData.get('previousScl').errors?.['pattern'] && formData.get('previousScl').touched"
+    class="errorText"
+    >*Enter valid school name</span
+  >
+
+  <div class="mb-3 input-group">
+    <label class="input-group-text">previous std parcentage</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="ex 85.6 == 86% "
+      formControlName="previousStdPer"
+    />
+  </div>
+  <span
+    *ngIf="formData.get('previousStdPer').errors?.['required'] && formData.get('previousStdPer').touched"
+    class="errorText"
+    >*Percentage field is required</span
+  >
+  <span
+  *ngIf="formData.get('previousStdPer').errors?.['pattern'] && formData.get('previousStdPer').touched"
+  class="errorText"
+  >*Percentage is not valid</span
+>
+
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- <a href="/api/v1/school/auth/google">click</a>  -->
 
 <div class="loader" *ngIf="isShowed"></div>
